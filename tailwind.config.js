@@ -76,6 +76,35 @@ export default {
               fontWeight: "600",
               lineHeight: "1.5",
             },
+            h2: {
+              fontSize: "32px",
+              fontWeight: "600",
+            },
+            h3: {
+              fontSize: "24px",
+              fontWeight: "700",
+            },
+            h4: {
+              fontSize: "18px",
+              fontWeight: "500",
+            },
+            h5: {
+              fontSize: "16px",
+              fontWeight: "600",
+            },
+            h6: {
+              fontSize: "14px",
+              fontWeight: "500",
+            },
+            p: {
+              fontSize: "14px",
+              lineHeight: "1.75",
+            },
+            label: {
+              fontSize: "12px",
+              lineHeight: "24px",
+              fontWeight: "500",
+            },
           },
         },
       },
@@ -107,5 +136,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };
