@@ -1,6 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [],
+  content: [
+    "./pages/**/*.{vue,js}", // Nuxt 頁面
+    "./components/**/*.{vue,js}", // Nuxt 組件
+    "./layouts/**/*.{vue,js}", // Nuxt 布局
+    "./nuxt.config.{js,ts}", // Nuxt 配置,
+  ],
   theme: {
     colors: {
       primary: {
@@ -68,6 +73,12 @@ export default {
       },
     },
     extend: {
+      fontSize: {
+        base: "14px",
+      },
+      fontWeight: {
+        normal: "400",
+      },
       typography: {
         DEFAULT: {
           css: {
@@ -133,6 +144,13 @@ export default {
         22: "152px",
         23: "160px",
         24: "168px",
+      },
+      boxShadow: {
+        medium: "4px 4px 4px 0 rgba(0,0,0,5%)",
+        small: "2px 2px 30px 0 rgba(0,0,0,5%)",
+      },
+      dropShadow: {
+        nav: "0px 4px 4px rgba(0,0,0,25%)",
       },
     },
   },
