@@ -11,9 +11,11 @@
           </div>
           <NuxtLink to="/" class="">
             <div
-              class="w-fit h-[44px] px-06 py-04 bg-neutral-b-900 text-neutral-w-900 rounded-[4px]"
+              class="w-fit h-[44px] px-06 flex justify-center items-center bg-neutral-b-900 text-neutral-w-900 rounded-[4px]"
             >
-              <div class="flex gap-[6px]">
+              <div
+                class="flex text-[14px] justify-center items-center gap-[6px]"
+              >
                 View Collection
                 <svg
                   width="24"

@@ -1,6 +1,6 @@
 <template>
   <div class="w-full bg-neutral-w-100">
-    <div class="container mx-auto flex justify-center">
+    <div class="container mx-auto my-[59px] flex justify-center">
       <div class="flex justify-between flex-1">
         <div class="prose flex flex-col mb-06">
           <h3>Join Our Newsletter</h3>
@@ -14,7 +14,7 @@
             placeholder="Your email address"
           />
           <button
-            class="w-fit h-[44px] px-06 py-04 bg-neutral-b-900 text-neutral-w-900 rounded-[4px]"
+            class="w-fit h-[44px] px-06 py-04 bg-neutral-b-900 text-neutral-w-900 rounded-[4px] text-[14px]"
           >
             Subscribe
           </button>
