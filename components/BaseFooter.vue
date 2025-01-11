@@ -24,7 +24,7 @@
   </div>
   <div class="w-full">
     <div class="container mx-auto flex flex-1 justify-center items-center">
-      <div class="mt-[74px] flex flex-1 justify-between">
+      <div class="mt-[74px] mb-[102px] flex flex-1 justify-between">
         <div class="flex flex-col max-w-[174px]">
           <div class="mb-04">
             <img src="public/Logo-Footer.svg" />

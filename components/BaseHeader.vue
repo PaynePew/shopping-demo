@@ -1,7 +1,14 @@
 <template>
   <div class="w-full">
     <div class="container mx-auto flex items-center justify-center">
-      <header class="flex flex-1 justify-between max-w-[1116px] h-[84px]">
+      <div
+        class="w-full absolute top-0 h-[40px] flex justify-center items-center bg-neutral-b-900 text-neutral-w-900 text-[14px] font-normal"
+      >
+        Get 25% OFF on your first order. Order Now
+      </div>
+      <header
+        class="flex flex-1 justify-between max-w-[1116px] h-[84px] mt-[40px]"
+      >
         <div class="flex flex-1 justify-center items-center">
           <div
             class="flex justify-center items-center min-w-[163px] min-h-[40px]"
