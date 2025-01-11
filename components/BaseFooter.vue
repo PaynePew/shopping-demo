@@ -90,4 +90,13 @@
       </div>
     </div>
   </div>
+  <div class="w-full">
+    <div
+      class="container mx-auto py-[27px] border-solid border-t border-neutral-w-100 flex justify-center items-center"
+    >
+      <div class="text-neutral-b-500 text-[14px]">
+        © 2023 DevCut. All rights reserved.
+      </div>
+    </div>
+  </div>
 </template>
