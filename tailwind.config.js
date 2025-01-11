@@ -7,6 +7,14 @@ export default {
     "./nuxt.config.{js,ts}", // Nuxt 配置,
   ],
   theme: {
+    container: {
+      center: true,
+      padding: "12px",
+      screens: {
+        sm: "100%",
+        lg: "1116px",
+      },
+    },
     colors: {
       primary: {
         "b-900": "#4078FF",

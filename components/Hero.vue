@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-[440px] bg-neutral-w-100 shadow-medium">
     <div class="container mx-auto flex justify-center items-center">
-      <div class="flex flex-1 justify-evenly relative">
+      <div class="flex flex-1 justify-between relative">
         <div class="flex flex-col mt-[136px]">
           <div class="prose mb-[48px]">
             <h2 class="mb-04 text-neutral-b-800">Fresh Arrivals Online</h2>

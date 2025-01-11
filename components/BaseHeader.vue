@@ -1,11 +1,12 @@
 <template>
-  <div>
-    <div class="container justify-center">
-      <header class="flex flex-1 w-[1116px] h-[84px]">
-        <div class="w-full flex justify-center items-center">
-          <div class="flex justify-center items-center gap-04">
-            <img src="/public/Logomark.svg" alt="logo" />
-            <span class="font-extrabold text-neutral-b-900">Ecommerce</span>
+  <div class="w-full">
+    <div class="container mx-auto flex items-center justify-center">
+      <header class="flex flex-1 justify-between max-w-[1116px] h-[84px]">
+        <div class="flex flex-1 justify-center items-center">
+          <div
+            class="flex justify-center items-center min-w-[163px] min-h-[40px]"
+          >
+            <img src="/public/Logo-Header.svg" alt="logo" />
           </div>
           <nav
             class="w-full flex justify-center items-center gap-07 text-neutral-b-500 drop-shadow-nav font-medium"
