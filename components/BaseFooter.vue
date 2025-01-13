@@ -25,13 +25,18 @@
   <div class="w-full">
     <div class="container mx-auto flex flex-1 justify-center items-center">
       <div class="mt-[74px] mb-[102px] flex flex-1 justify-between">
-        <div class="flex flex-col max-w-[174px]">
+        <div class="flex flex-col max-w-[272px]">
           <div class="mb-04">
             <img src="public/Logo-Footer.svg" />
           </div>
-          <p class="prose text-neutral-b-500">
+          <p class="text-neutral-b-500 text-[14px] font-normal mb-07">
             DevCut is a YouTube channel for practical project-based learning.
           </p>
+          <div class="flex flex-1 gap-06">
+            <img class="w-06 h-06" src="/Github.svg" alt="github icon" />
+            <img class="w-06 h-06" src="/Instagram.svg" alt="instagram icon" />
+            <img class="w-06 h-06" src="/Youtube.svg" alt="youtube icon" />
+          </div>
         </div>
         <div class="flex gap-12">
           <div class="flex flex-col">
