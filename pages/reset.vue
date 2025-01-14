@@ -2,7 +2,7 @@
   <!--Breadcrumb-->
   <section class="w-full bg-neutral-w-100">
     <div
-      class="container pl-04 my-[16px] flex flex-1 flex-col text-[14px] font-medium"
+      class="container pl-04 py-[35px] flex flex-1 flex-col text-[14px] font-medium"
     >
       <div class="prose mb-03"><h3>Reset Password</h3></div>
       <div class="flex flex-1 items-center">

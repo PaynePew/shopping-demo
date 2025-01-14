@@ -123,7 +123,7 @@
           <div
             class="border-solid w-[40px] h-[40px] rounded-[4px] border-2 border-neutral-b-100"
           >
-            <img src="/Whishlist.svg" />
+            <img src="/Wishlist.svg" />
           </div>
         </div>
         <!--Adertise Footer-->
