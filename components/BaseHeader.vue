@@ -45,7 +45,7 @@
                 <img src="/public/Cart.svg" alt="cart" />
               </div>
               <div class="w-[18px] h-[18px]">
-                <img src="/public/User.svg" alt="user" />
+                <img src="/public/User-Account.svg" alt="user" />
               </div>
             </div>
           </div>
