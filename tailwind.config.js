@@ -81,6 +81,9 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ["Inter", "ui-sans-serif", "system-ui"],
+      },
       fontSize: {
         base: "14px",
       },
