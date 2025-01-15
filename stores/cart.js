@@ -12,13 +12,19 @@ export const useCartStore = defineStore("cart", {
   },
   actions: {
     addToCart(item) {
-      this.cart.push(item);
+      const exists = this.cart.find((product) => product.id === item.id);
+      if (!exists) {
+        this.cart.push(item);
+      }
     },
     removeFromCart(itemId) {
       this.cart = this.cart.filter((item) => item.id !== itemId);
     },
     addToWishlist(item) {
-      this.wishlist.push(item);
+      const exists = this.wishlist.find((product) => product.id === item.id);
+      if (!exists) {
+        this.wishlist.push(item);
+      }
     },
     removeFromWishlist(itemId) {
       this.wishlist = this.wishlist.filter((item) => item.id !== itemId);
