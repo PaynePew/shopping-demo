@@ -5,7 +5,9 @@
     >
       <div class="flex justify-between">
         <div class="w-[328px] h-[218px]">
-          <div class="mb-[24px]">
+          <div
+            class="mb-[24px] w-[48px] h-[48px] flex justify-center items-center rounded-[100px] bg-neutral-w-100"
+          >
             <img src="public/Delivery.svg" alt="delivery icon" />
           </div>
           <div class="prose mb-[12px]">
