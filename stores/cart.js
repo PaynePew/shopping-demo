@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 export const useCartStore = defineStore("cart", {
   state: () => ({
     cart: [],
+    wishlist: [],
   }),
   getters: {
     totalItems: (state) => state.cart.length,
@@ -15,6 +16,12 @@ export const useCartStore = defineStore("cart", {
     },
     removeFromCart(itemId) {
       this.cart = this.cart.filter((item) => item.id !== itemId);
+    },
+    addToWishlist(item) {
+      this.wishlist.push(item);
+    },
+    removeFromWishlist(itemId) {
+      this.wishlist = this.wishlist.filter((item) => item.id !== itemId);
     },
   },
 });
