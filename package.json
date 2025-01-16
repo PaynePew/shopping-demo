@@ -7,7 +7,8 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "test:e2e": "nuxt build && npx playwright test"
   },
   "dependencies": {
     "@nuxtjs/tailwindcss": "^6.12.2",
@@ -20,6 +21,7 @@
   },
   "devDependencies": {
     "@nuxt/test-utils": "^3.15.4",
+    "@playwright/test": "^1.49.1",
     "@vue/test-utils": "^2.4.6",
     "happy-dom": "^16.6.0",
     "jsdom": "^26.0.0",

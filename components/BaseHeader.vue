@@ -41,9 +41,9 @@
               class="min-w-[264px] h-[45px] border-2 border-neutral-b-100 rounded-[4px] focus:border-neutral-b-300 focus:outline-none"
             />
             <div class="w-full flex flex-1 gap-07 justify-center items-center">
-              <div class="w-[18px] h-[18px]">
+              <button @click="toggleCart" class="w-[18px] h-[18px]">
                 <img src="/public/Cart.svg" alt="cart" />
-              </div>
+              </button>
               <div class="w-[18px] h-[18px]">
                 <img src="/public/User-Account.svg" alt="user" />
               </div>
@@ -52,5 +52,13 @@
         </div>
       </header>
     </div>
+    <CartModal v-if="isCartOpen" @close="toggleCart" />
   </div>
 </template>
+<script setup>
+const isCartOpen = ref(false);
+
+function toggleCart() {
+  isCartOpen.value = !isCartOpen.value;
+}
+</script>

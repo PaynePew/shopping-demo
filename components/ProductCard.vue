@@ -9,6 +9,7 @@
         class="absolute w-full h-full hover:backdrop-blur-[2px] hover:bg-white"
       ></div>
       <button
+        data-test="product-add-to-cart"
         @click="handleAddToCart"
         class="absolute bottom-0 opacity-0 bg-neutral-b-900 w-full h-fit flex flex-1 justify-center items-center py-03 gap-03 group-hover:opacity-100"
       >
