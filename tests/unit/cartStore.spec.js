@@ -12,7 +12,14 @@ describe("Cart Store", () => {
   });
 
   it("adds a product to the cart", () => {
-    const product = { id: 1, name: "Product A", price: 100 };
+    const product = {
+      id: 1,
+      name: "Product A",
+      price: 100,
+      color: "blue",
+      size: "M",
+      quantity: 1,
+    };
     cartStore.addToCart(product);
     // Cart's array.length === 1
     expect(cartStore.cart).toHaveLength(1);

@@ -62,15 +62,21 @@
             AVAILABLE COLORS
           </div>
           <div class="flex flex-1 gap-[14px] mb-[30px]">
-            <button>
-              <div class="w-06 h-06 rounded-[100px] bg-semantic-b-400"></div>
-            </button>
-            <button>
-              <div class="w-06 h-06 rounded-[100px] bg-semantic-y-400"></div>
-            </button>
-            <button>
-              <div class="w-06 h-06 rounded-[100px] bg-semantic-g-400"></div>
-            </button>
+            <div
+              v-for="(color, index) in colors"
+              :key="index"
+              class="w-07 h-07 flex items-center justify-center rounded-full border-2"
+              :class="{
+                'border-neutral-b-900': selectedColor === color,
+                'border-[0px]': selectedColor !== color,
+              }"
+              @click="selectedColor = color"
+            >
+              <button
+                class="w-06 h-06 rounded-full"
+                :style="{ backgroundColor: color }"
+              ></button>
+            </div>
           </div>
         </div>
         <!--Product Size-->
@@ -199,6 +205,11 @@
 </template>
 
 <script setup>
+const colors = ["#A3BEF8", "#FFD58A", "#83B18B", "#4078FF"];
+
+// State Management
+const selectedColor = ref(colors[0]);
+
 const products = [
   {
     id: 1,
