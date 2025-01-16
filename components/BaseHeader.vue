@@ -42,7 +42,11 @@
             />
             <div class="w-full flex flex-1 gap-07 justify-center items-center">
               <button @click="toggleCart" class="w-[18px] h-[18px]">
-                <img src="/public/Cart.svg" alt="cart" />
+                <img
+                  data-test="toggle-cart"
+                  src="/public/Cart.svg"
+                  alt="cart"
+                />
               </button>
               <div class="w-[18px] h-[18px]">
                 <img src="/public/User-Account.svg" alt="user" />

@@ -115,13 +115,14 @@
             class="flex justify-between items-center border-[1px] border-neutral-b-100 rounded-[4px] px-05 w-[164px] h-[40px]"
           >
             <button>-</button>
-            <span>1</span>
+            <span data-test="cart-count">1</span>
             <button>+</button>
           </div>
         </div>
         <!--Add To Cart-->
         <div class="flex flex-1 items-center gap-05 mb-04">
           <button
+            data-test="product-add-to-cart"
             class="w-[284px] h-[44px] px-06 py-04 bg-neutral-b-900 text-neutral-w-900 rounded-[4px] text-[14px]"
           >
             Add to cart
@@ -187,13 +188,49 @@
         </div>
       </div>
       <div class="flex flex-1">
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+        <ProductCard
+          v-for="product in products"
+          :key="product.id"
+          :product="product"
+        />
       </div>
     </div>
   </section>
 </template>
 
-<script setup></script>
+<script setup>
+const products = [
+  {
+    id: 1,
+    name: "Classic Monochrome Tees",
+    status: "IN STOCK",
+    price: 35.0,
+    image: "/Cover-1.png",
+  },
+  {
+    id: 2,
+    name: "Monochromatic Wardrobe",
+    status: "IN STOCK",
+    price: 27.0,
+    image: "/Cover-2.png",
+  },
+  {
+    id: 3,
+    name: "Essential Neutrals",
+    status: "IN STOCK",
+    price: 22.0,
+    image: "/Cover-3.png",
+  },
+  {
+    id: 4,
+    name: "UTRAANET Black",
+    status: "IN STOCK",
+    price: 43.0,
+    image: "/Cover-4.png",
+  },
+];
+
+const handleAddToCart = (product) => {
+  console.log("Added to cart:", product);
+};
+</script>

@@ -17,7 +17,6 @@
           v-for="product in products"
           :key="product.id"
           :product="product"
-          @add-to-cart="handleAddToCart"
         />
       </div>
     </div>

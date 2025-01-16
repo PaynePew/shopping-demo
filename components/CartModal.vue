@@ -5,7 +5,10 @@
     class="fixed inset-0 bg-neutral-b-900 bg-opacity-50 z-10"
   ></div>
   <!--Cart Modal-->
-  <div class="fixed top-0 right-0 w-[416px] flex flex-col z-20 h-full">
+  <div
+    data-test="cart-modal"
+    class="fixed top-0 right-0 w-[416px] flex flex-col z-20 h-full"
+  >
     <!--Cart Title-->
     <div
       class="prose bg-neutral-w-100 h-[72px] flex justify-between items-center px-[32px]"
@@ -49,7 +52,7 @@
                 class="flex justify-between items-center border-[1px] border-neutral-b-100 rounded-[4px] px-05 w-[107px] h-[40px]"
               >
                 <button>-</button>
-                <span>1</span>
+                <span data-test="product-quantity">1</span>
                 <button>+</button>
               </div>
               <div>$75.00</div>
