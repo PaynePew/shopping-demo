@@ -1,3 +1,4 @@
+// @vitest-environment nuxt
 import { setActivePinia, createPinia } from "pinia";
 import { describe, it, expect, beforeEach } from "vitest";
 import { useCartStore } from "@/stores/cart";
