@@ -8,12 +8,11 @@
       <div
         class="absolute w-full h-full hover:backdrop-blur-[2px] hover:bg-white"
       ></div>
-      <button
-        data-test="product-add-to-cart"
-        @click="handleAddToCart"
+      <NuxtLink
+        to="/products/1"
         class="absolute bottom-0 opacity-0 bg-neutral-b-900 w-full h-fit flex flex-1 justify-center items-center py-03 gap-03 group-hover:opacity-100"
       >
-        <div class="text-[14px] text-neutral-w-900">Add to cart</div>
+        <div class="text-[14px] text-neutral-w-900">View</div>
         <div>
           <svg
             width="24"
@@ -31,7 +30,7 @@
             />
           </svg>
         </div>
-      </button>
+      </NuxtLink>
       <div
         class="absolute top-[8px] right-[11px] opacity-0 cursor-pointer group-hover:opacity-100"
       >

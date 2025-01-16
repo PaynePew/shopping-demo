@@ -111,7 +111,13 @@
           <div class="uppercase text-neutral-b-500 text-[12px] mb-[10px]">
             QUANTITY
           </div>
-          <input type="number" />
+          <div
+            class="flex justify-between items-center border-[1px] border-neutral-b-100 rounded-[4px] px-05 w-[164px] h-[40px]"
+          >
+            <button>-</button>
+            <span>1</span>
+            <button>+</button>
+          </div>
         </div>
         <!--Add To Cart-->
         <div class="flex flex-1 items-center gap-05 mb-04">
