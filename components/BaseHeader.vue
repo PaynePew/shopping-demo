@@ -48,9 +48,9 @@
                   alt="cart"
                 />
               </button>
-              <div class="w-[18px] h-[18px]">
+              <NuxtLink to="/user/orders" class="w-[18px] h-[18px]">
                 <img src="/public/User-Account.svg" alt="user" />
-              </div>
+              </NuxtLink>
             </div>
           </div>
         </div>

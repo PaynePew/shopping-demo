@@ -21,36 +21,49 @@
       <div
         class="w-[212px] pt-[60px] pb-[118px] pr-[36px] mb-[131px] mt-[60px] flex flex-col gap-05 justify-center items-center border-r-[1px] border-neutral-w-200"
       >
-        <div
+        <NuxtLink
+          to="/user/orders"
           class="w-full flex gap-[10px] items-center bg-neutral-w-100 rounded-[8px] pl-06 py-03"
         >
           <div class="w-06 h-06"><img src="/Cart.svg" alt="cart icon" /></div>
           <div class="text-[14px] text-neutral-b-900">Orders</div>
-        </div>
-        <div class="w-full flex self-start gap-[10px] items-center pl-06">
+        </NuxtLink>
+        <NuxtLink
+          to="/user/wishlist"
+          class="w-full flex self-start gap-[10px] items-center pl-06 py-03"
+        >
           <div class="w-06 h-06">
             <img src="/Heart.svg" alt="wishlist icon" />
           </div>
           <div class="text-[14px] text-neutral-b-500">Wishlist</div>
-        </div>
-        <div class="w-full flex self-start gap-[10px] items-center pl-06 py-03">
+        </NuxtLink>
+        <NuxtLink
+          to="/user/address"
+          class="w-full flex self-start gap-[10px] items-center pl-06 py-03"
+        >
           <div class="w-06 h-06">
             <img src="/Delivery.svg" alt="delivery icon" />
           </div>
           <div class="text-[14px] text-neutral-b-500">Address</div>
-        </div>
-        <div class="w-full flex self-start gap-[10px] items-center pl-06 py-03">
+        </NuxtLink>
+        <NuxtLink
+          to="/user/password"
+          class="w-full flex self-start gap-[10px] items-center pl-06 py-03"
+        >
           <div class="w-06 h-06">
             <img src="/Key.svg" alt="key icon" />
           </div>
           <div class="text-[14px] text-neutral-b-500">Password</div>
-        </div>
-        <div class="w-full flex self-start gap-[10px] items-center pl-06 py-03">
+        </NuxtLink>
+        <NuxtLink
+          to="/user/account"
+          class="w-full flex self-start gap-[10px] items-center pl-06 py-03"
+        >
           <div class="w-06 h-06">
             <img src="/User.svg" alt="user icon" />
           </div>
           <div class="text-[14px] text-neutral-b-500">Account Detail</div>
-        </div>
+        </NuxtLink>
         <div class="w-full flex self-start gap-[10px] items-center pl-06 py-03">
           <div class="w-06 h-06">
             <img src="/Logout.svg" alt="logout icon" />
