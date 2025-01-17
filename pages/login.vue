@@ -32,32 +32,41 @@
           <div class="mx-05 text-neutral-b-500 text-[12px]">OR</div>
           <div class="h-[1px] w-full bg-neutral-b-100"></div>
         </div>
-        <div class="w-full flex flex-col gap-[15px] mb-[16px]">
-          <div class="flex flex-col">
-            <label class="text-neutral-b-600">Email</label>
-            <input
-              class="h-fit border-[1px] border-neutral-b-100 px-[15px] py-[10px] rounded-[6px] focus:outline-none"
-            />
+        <form @submit.prevent="login">
+          <div class="w-full flex flex-col gap-[15px] mb-[16px]">
+            <div class="flex flex-col">
+              <label class="text-neutral-b-600">Email</label>
+              <input
+                v-model="email"
+                type="email"
+                required
+                class="h-fit border-[1px] border-neutral-b-100 px-[15px] py-[10px] rounded-[6px] focus:outline-none"
+              />
+            </div>
+            <div class="flex flex-col">
+              <label class="text-neutral-b-600">Password</label>
+              <input
+                v-model="password"
+                type="password"
+                required
+                class="h-fit border-[1px] border-neutral-b-100 px-[15px] py-[10px] rounded-[6px] focus:outline-none"
+              />
+            </div>
           </div>
-          <div class="flex flex-col">
-            <label class="text-neutral-b-600">Password</label>
-            <input
-              class="h-fit border-[1px] border-neutral-b-100 px-[15px] py-[10px] rounded-[6px] focus:outline-none"
-            />
+          <div class="flex self-end mb-[24px]">
+            <div class="font-medium text-[12px] text-neutral-b-600">
+              Forgot Password?
+            </div>
           </div>
-        </div>
-        <div class="flex self-end mb-[24px]">
-          <div class="font-medium text-[12px] text-neutral-b-600">
-            Forgot Password?
+          <div class="w-full mb-06">
+            <button
+              type="submit"
+              class="w-full h-[44px] px-06 py-04 bg-neutral-b-900 text-neutral-w-900 rounded-[4px] text-[14px] flex flex-1 justify-center items-center"
+            >
+              Login
+            </button>
           </div>
-        </div>
-        <div class="w-full mb-06">
-          <button
-            class="w-full h-[44px] px-06 py-04 bg-neutral-b-900 text-neutral-w-900 rounded-[4px] text-[14px] flex flex-1 justify-center items-center"
-          >
-            Login
-          </button>
-        </div>
+        </form>
         <div class="flex">
           <div class="font-medium text-[14px] text-neutral-b-500">
             Don't have an account? Sign up
@@ -67,3 +76,28 @@
     </div>
   </section>
 </template>
+
+<script setup>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const email = ref("");
+const password = ref("");
+
+const login = async () => {
+  try {
+    await $fetch("http://localhost:3000/api/auth/login", {
+      method: "POST",
+      body: {
+        email: email.value,
+        password: password.value,
+      },
+    });
+    router.push("/"); // 假設登入後跳轉到 dashboard 頁面
+  } catch (error) {
+    console.error("Login failed:", error);
+    alert("Login failed. Please check your email and password.");
+  }
+};
+</script>
