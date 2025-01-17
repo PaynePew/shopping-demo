@@ -24,85 +24,59 @@
     >
       <div class="flex flex-col w-full gap-07">
         <!--Shopping Cart Card-->
-        <div class="flex gap-07 pb-07 border-b-[1px] border-neutral-w-200">
+        <div
+          v-for="(item, index) in cartStore.cart"
+          :key="`${item.id}-${item.color}-${item.size}`"
+          class="flex gap-07 pb-07 border-b-[1px] border-neutral-w-200"
+        >
+          <!--Product Image-->
           <div
             class="relative w-[80px] h-[80px] rounded-[4px] bg-neutral-w-100 flex justify-center items-center overflow-clip"
           >
-            <img src="/Cover-1.png" alt="product image" />
+            <img :src="item.image" alt="product image" />
             <img
+              @click="removeItem(item.id, item.color, item.size)"
               class="absolute top-0 right-0 cursor-pointer"
               src="/X.svg"
               alt="close icon"
             />
           </div>
+          <!--Product Detail-->
           <div>
             <div class="prose flex flex-1 gap-05 items-center mb-03">
               <p class="font-medium mb-0 text-neutral-b-900">
-                Raw Black T-Shirt Lineup
+                {{ item.name }}
               </p>
               <div class="flex items-center gap-[6px]">
                 <div
-                  class="w-[12px] h-[12px] bg-semantic-g-300 rounded-[100px]"
+                  class="w-[12px] h-[12px] rounded-[100px]"
+                  :style="{ backgroundColor: item.color }"
                 ></div>
-                <div class="text-[12px] text-neutral-b-500">- M</div>
+                <div class="text-[12px] text-neutral-b-500">
+                  - {{ item.size }}
+                </div>
               </div>
             </div>
             <div class="flex flex-1 items-center gap-05">
               <div
                 class="flex justify-between items-center border-[1px] border-neutral-b-100 rounded-[4px] px-05 w-[107px] h-[40px]"
               >
-                <button>-</button>
-                <span data-test="product-quantity">1</span>
-                <button>+</button>
+                <button @click="decreaseQuantity(item)">-</button>
+                <span data-test="product-quantity">{{ item.quantity }}</span>
+                <button @click="increaseQuantity(item)">+</button>
               </div>
-              <div>$75.00</div>
-            </div>
-          </div>
-        </div>
-
-        <!--Shopping Cart Card-->
-        <div class="flex gap-07">
-          <div
-            class="relative w-[80px] h-[80px] rounded-[4px] bg-neutral-w-100 flex justify-center items-center overflow-clip"
-          >
-            <img src="/Cover-1.png" alt="product image" />
-            <img
-              class="absolute top-0 right-0 cursor-pointer"
-              src="/X.svg"
-              alt="close icon"
-            />
-          </div>
-          <div>
-            <div class="prose flex flex-1 gap-05 items-center mb-03">
-              <p class="font-medium mb-0 text-neutral-b-900">
-                Raw Black T-Shirt Lineup
-              </p>
-              <div class="flex items-center gap-[6px]">
-                <div
-                  class="w-[12px] h-[12px] bg-semantic-g-300 rounded-[100px]"
-                ></div>
-                <div class="text-[12px] text-neutral-b-500">- M</div>
-              </div>
-            </div>
-            <div class="flex flex-1 items-center gap-05">
-              <div
-                class="flex justify-between items-center border-[1px] border-neutral-b-100 rounded-[4px] px-05 w-[107px] h-[40px]"
-              >
-                <button>-</button>
-                <span>1</span>
-                <button>+</button>
-              </div>
-              <div>$75.00</div>
+              <div>${{ item.price.toFixed(2) }}</div>
             </div>
           </div>
         </div>
       </div>
+      <!--Total Price-->
       <div>
         <div
           class="prose mb-06 px-01 pt-05 flex flex-1 justify-between border-t-[1px] border-neutral-w-200"
         >
           <h6 class="">Total</h6>
-          <h6 class="">$ 97.00</h6>
+          <h6 class="">${{ cartStore.totalPrice.toFixed(2) }}</h6>
         </div>
         <div class="mb-07">
           <button
@@ -123,4 +97,22 @@
 
 <script setup>
 const emit = defineEmits(["close"]);
+const cartStore = useCartStore();
+
+const increaseQuantity = (item) => {
+  cartStore.addToCart({ ...item, quantity: 1 });
+};
+const decreaseQuantity = (item) => {
+  if (item.quantity > 1) {
+    cartStore.addToCart({ ...item, quantity: -1 });
+  } else {
+    removeItem(item.id, item.color, item.size);
+  }
+};
+
+const removeItem = (id, color, size) => {
+  console.log("cart items", cartStore.cart);
+  console.log("removing item", { id, color, size });
+  cartStore.removeFromCart(id, color, size);
+};
 </script>

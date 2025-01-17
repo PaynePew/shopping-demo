@@ -86,29 +86,17 @@
           </div>
           <div class="flex flex-1 gap-[8px]">
             <button
-              class="text-neutral-b-500 text-[12px] font-medium border-solid w-[40px] h-[40px] rounded-[4px] border-2 border-neutral-b-100"
+              v-for="(size, index) in sizes"
+              :key="index"
+              :class="[
+                'text-neutral-b-500 text-[12px] font-medium border-solid w-[40px] h-[40px] rounded-[4px] border-2',
+                selectedSize === size
+                  ? 'border-neutral-b-900'
+                  : 'border-neutral-b-100',
+              ]"
+              @click="selectedSize = size"
             >
-              S
-            </button>
-            <button
-              class="text-neutral-b-500 text-[12px] font-medium border-solid w-[40px] h-[40px] rounded-[4px] border-2 border-neutral-b-100"
-            >
-              M
-            </button>
-            <button
-              class="text-neutral-b-500 text-[12px] font-medium border-solid w-[40px] h-[40px] rounded-[4px] border-2 border-neutral-b-100"
-            >
-              X
-            </button>
-            <button
-              class="text-neutral-b-500 text-[12px] font-medium border-solid w-[40px] h-[40px] rounded-[4px] border-2 border-neutral-b-100"
-            >
-              XL
-            </button>
-            <button
-              class="text-neutral-b-500 text-[12px] font-medium border-solid w-[40px] h-[40px] rounded-[4px] border-2 border-neutral-b-100"
-            >
-              XXL
+              {{ size }}
             </button>
           </div>
         </div>
@@ -120,9 +108,9 @@
           <div
             class="flex justify-between items-center border-[1px] border-neutral-b-100 rounded-[4px] px-05 w-[164px] h-[40px]"
           >
-            <button>-</button>
-            <span data-test="cart-count">1</span>
-            <button>+</button>
+            <button @click="decreaseQuantity">-</button>
+            <span>{{ quantity }}</span>
+            <button @click="increaseQuantity">+</button>
           </div>
         </div>
         <!--Add To Cart-->
@@ -130,6 +118,7 @@
           <button
             data-test="product-add-to-cart"
             class="w-[284px] h-[44px] px-06 py-04 bg-neutral-b-900 text-neutral-w-900 rounded-[4px] text-[14px]"
+            @click="addToCart"
           >
             Add to cart
           </button>
@@ -205,10 +194,36 @@
 </template>
 
 <script setup>
+const cartStore = useCartStore();
 const colors = ["#A3BEF8", "#FFD58A", "#83B18B", "#4078FF"];
+const sizes = ["S", "M", "L", "XL", "XXL"];
 
 // State Management
 const selectedColor = ref(colors[0]);
+const selectedSize = ref(sizes[0]);
+const quantity = ref(1);
+const increaseQuantity = () => {
+  quantity.value++;
+};
+const decreaseQuantity = () => {
+  if (quantity.value > 1) quantity.value--;
+};
+
+const addToCart = () => {
+  const cartItem = {
+    id: 1,
+    name: "Raw Black T-shirt Lineup",
+    price: 75.0,
+    color: selectedColor.value,
+    size: selectedSize.value,
+    quantity: quantity.value,
+    totalPrice: 75 * quantity.value,
+    image: "/Cover-1.png",
+  };
+
+  cartStore.addToCart(cartItem);
+  console.log(cartStore.cart);
+};
 
 const products = [
   {
