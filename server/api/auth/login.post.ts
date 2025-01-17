@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
   }
   const prisma = new PrismaClient();
 
-  // Look up  user
+  // Look up user
   const user = await prisma.user.findUnique({ where: { email } });
   if (!user) {
     throw createError({

@@ -55,7 +55,9 @@
           <div class="w-06 h-06">
             <img src="/Logout.svg" alt="logout icon" />
           </div>
-          <div class="text-[14px] text-neutral-b-500">Logout</div>
+          <button @click="logout" class="text-[14px] text-neutral-b-500">
+            Logout
+          </button>
         </div>
       </div>
       <!--Orders-->
@@ -120,3 +122,26 @@
     </div>
   </section>
 </template>
+
+<script setup>
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const logout = async () => {
+  try {
+    const response = await fetch("http://localhost:3000/api/auth/logout", {
+      method: "POST",
+    });
+
+    if (response.ok) {
+      // 重定向到首頁或登入頁面
+      router.push("/login");
+    } else {
+      console.error("Failed to log out");
+    }
+  } catch (err) {
+    console.error("Error during logout:", err);
+  }
+};
+</script>

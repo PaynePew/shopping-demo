@@ -20,6 +20,7 @@
     <div class="container mx-auto pt-[128px] pb-[148px] flex justify-center">
       <div class="w-[320px] flex flex-col justify-center items-center">
         <div
+          @click="googleLogin"
           class="w-full px-06 py-04 flex flex-1 justify-center items-center gap-03 border-solid border-[1px] border-neutral-b-200 rounded-[4px] mb-07"
         >
           <div><img src="/Google.svg" alt="google icon" /></div>
@@ -98,6 +99,15 @@ const login = async () => {
   } catch (error) {
     console.error("Login failed:", error);
     alert("Login failed. Please check your email and password.");
+  }
+};
+
+const googleLogin = async () => {
+  try {
+    window.location.href = "http://localhost:3000/api/auth/google-login"; // 跳轉到後端的 Google 登錄 URL
+  } catch (error) {
+    console.error("Google Login failed:", error);
+    alert("Google Login failed. Please try again.");
   }
 };
 </script>
