@@ -138,9 +138,6 @@
 
 <script setup>
 import { useRouter } from "vue-router";
-definePageMeta({
-  middleWare: "auth",
-});
 
 const router = useRouter();
 const authStore = useAuthStore();

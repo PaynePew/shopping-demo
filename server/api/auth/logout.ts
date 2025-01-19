@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 export default defineEventHandler(async (event) => {
   try {
     const cookies = parseCookies(event);
+    const jwtSecret = process.env.JWT_SECRET;
 
     if (!cookies.access_token) {
       return {
@@ -11,8 +12,11 @@ export default defineEventHandler(async (event) => {
       };
     }
 
+    if (!jwtSecret) {
+      throw new Error("JWT_SECRET is not defined in environment variables.");
+    }
     // 驗證 JWT Token
-    const decoded = jwt.verify(cookies.access_token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(cookies.access_token, jwtSecret);
     if (!decoded) {
       return {
         status: 401,
@@ -25,7 +29,7 @@ export default defineEventHandler(async (event) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       path: "/",
-      sameSite: "Strict",
+      sameSite: "strict",
       maxAge: -1, // 設置過期時間為負數，表示立即清除
     });
 
