@@ -25,7 +25,7 @@
             <NuxtLink to="/">
               <span>Home</span>
             </NuxtLink>
-            <NuxtLink to="/">
+            <NuxtLink to="/listing">
               <span>Category</span>
             </NuxtLink>
             <NuxtLink to="/">

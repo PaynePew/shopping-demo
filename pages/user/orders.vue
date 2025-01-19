@@ -138,21 +138,22 @@
 
 <script setup>
 import { useRouter } from "vue-router";
+definePageMeta({
+  middleWare: "auth",
+});
 
 const router = useRouter();
+const authStore = useAuthStore();
 
 const logout = async () => {
   try {
-    const response = await fetch("http://localhost:3000/api/auth/logout", {
+    const response = await $fetch("http://localhost:3000/api/auth/logout", {
       method: "POST",
+      credentials: "include", // 確保攜帶 Cookie
     });
 
-    if (response.ok) {
-      // 重定向到首頁或登入頁面
-      router.push("/login");
-    } else {
-      console.error("Failed to log out");
-    }
+    authStore.clearAuth(); // 清除本地狀態
+    router.push("/login");
   } catch (err) {
     console.error("Error during logout:", err);
   }

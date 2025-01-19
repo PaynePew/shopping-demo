@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import { PrismaClient } from "@prisma/client";
 import jwt from "jsonwebtoken";
+import { setCookie } from "h3";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
@@ -50,9 +51,17 @@ export default defineEventHandler(async (event) => {
     { expiresIn: "7d" },
   );
 
+  // 設置 Cookie
+  setCookie(event, "access_token", token, {
+    httpOnly: true, // 防止客戶端 JavaScript 訪問 Cookie（提高安全性）
+    secure: process.env.NODE_ENV === "production", // 僅在 HTTPS 下傳輸
+    path: "/", // 全域可用
+    sameSite: "Strict", // 防止跨站請求
+    maxAge: 7 * 24 * 60 * 60, // 7 天的有效期
+  });
+
   return {
     message: "Login successful.",
-    token,
     user: {
       id: user.id,
       name: user.name,

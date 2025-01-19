@@ -1,36 +1,33 @@
-import { createClient } from "@supabase/supabase-js";
+import jwt from "jsonwebtoken";
 
 export default defineEventHandler(async (event) => {
-  const supabaseUrl = process.env.SUPABASE_URL;
-  const supabaseKey = process.env.SUPABASE_KEY;
-  const baseUrl = process.env.BASE_URL;
-
-  if (!supabaseUrl || !supabaseKey) {
-    throw new Error("Supabase is not defined in environment variables.");
-  }
-  const supabase = createClient(supabaseUrl, supabaseKey);
-
   try {
-    // 從請求中獲取 Supabase 的認證 Cookie
-    const { access_token } = parseCookies(event);
+    const cookies = parseCookies(event);
 
-    if (!access_token) {
+    if (!cookies.access_token) {
       return {
         status: 401,
         body: { error: "User is not logged in" },
       };
     }
 
-    // 使用 Supabase 的 signOut 方法來清除 session
-    const { error } = await supabase.auth.signOut();
-
-    if (error) {
-      throw error;
+    // 驗證 JWT Token
+    const decoded = jwt.verify(cookies.access_token, process.env.JWT_SECRET);
+    if (!decoded) {
+      return {
+        status: 401,
+        body: { error: "Invalid token" },
+      };
     }
 
-    // 清除客戶端的 Cookie
-    setCookie(event, "access_token", "", { maxAge: -1 });
-    setCookie(event, "refresh_token", "", { maxAge: -1 });
+    // 清除 Cookie
+    setCookie(event, "access_token", "", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+      sameSite: "Strict",
+      maxAge: -1, // 設置過期時間為負數，表示立即清除
+    });
 
     return {
       status: 200,

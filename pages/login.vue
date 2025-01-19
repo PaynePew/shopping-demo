@@ -83,22 +83,23 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
+const authStore = useAuthStore();
 const email = ref("");
 const password = ref("");
 
 const login = async () => {
   try {
-    await $fetch("http://localhost:3000/api/auth/login", {
+    const response = await $fetch("http://localhost:3000/api/auth/login", {
       method: "POST",
-      body: {
-        email: email.value,
-        password: password.value,
-      },
+      body: { email: email.value, password: password.value },
+      credentials: "include", // 確保攜帶 Cookie
     });
-    router.push("/"); // 假設登入後跳轉到 dashboard 頁面
-  } catch (error) {
-    console.error("Login failed:", error);
-    alert("Login failed. Please check your email and password.");
+
+    // 如果需要，也可以更新 Pinia 的狀態
+    authStore.setUser(response.user);
+    router.push("/");
+  } catch (err) {
+    console.error("Error during login:", err);
   }
 };
 
