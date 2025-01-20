@@ -1,0 +1,30 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # 或你的主要分支名稱，例如 master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18 # 或你使用的 Node.js 版本
+
+      - name: Install dependencies
+        run: npm install # 或 yarn install
+
+      - name: Build website
+        run: npm run build # 或 yarn build，根據你的專案設定
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist # 或你的 build 輸出資料夾名稱
+
