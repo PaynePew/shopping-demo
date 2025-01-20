@@ -27,3 +27,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: .output/public # Nuxt 3 build 輸出資料夾
+          branch: gh-pages # 指定部署分支
+          # 下面這行可以自動建立 gh-pages 分支
+          create_branch: true
