@@ -25,56 +25,73 @@
           <h5>Shipping Address</h5>
         </div>
         <!--Address Form-->
-        <div class="w-full flex flex-col gap-[40px]">
-          <div class="flex flex-col">
-            <label class="text-neutral-b-600">Street Address</label>
-            <input
-              class="h-fit border-[1px] border-neutral-b-100 px-[15px] py-[10px] rounded-[6px] focus:outline-none"
-            />
+        <form id="checkout" @submit.prevent="checkout">
+          <div class="w-full flex flex-col gap-[40px]">
+            <div class="flex flex-col">
+              <label class="text-neutral-b-600">Street Address</label>
+              <input
+                v-model="street"
+                required
+                class="h-fit border-[1px] border-neutral-b-100 px-[15px] py-[10px] rounded-[6px] focus:outline-none"
+              />
+            </div>
+            <div class="flex flex-1 gap-05">
+              <div class="flex flex-col basis-[50%]">
+                <label class="text-neutral-b-600">City</label>
+                <input
+                  v-model="city"
+                  required
+                  class="h-fit border-[1px] border-neutral-b-100 px-[15px] py-[10px] rounded-[6px] focus:outline-none"
+                />
+              </div>
+              <div class="flex flex-col basis-[50%]">
+                <label class="text-neutral-b-600">State</label>
+                <input
+                  v-model="state"
+                  required
+                  class="h-fit border-[1px] border-neutral-b-100 px-[15px] py-[10px] rounded-[6px] focus:outline-none"
+                />
+              </div>
+            </div>
+            <div class="flex flex-1 gap-05">
+              <div class="flex flex-col basis-[50%]">
+                <label class="text-neutral-b-600">Zip Code</label>
+                <input
+                  v-model="zip"
+                  required
+                  class="h-fit border-[1px] border-neutral-b-100 px-[15px] py-[10px] rounded-[6px] focus:outline-none"
+                />
+              </div>
+              <div class="flex flex-col basis-[50%]">
+                <label class="text-neutral-b-600">Country</label>
+                <input
+                  v-model="country"
+                  required
+                  class="h-fit border-[1px] border-neutral-b-100 px-[15px] py-[10px] rounded-[6px] focus:outline-none"
+                />
+              </div>
+            </div>
+            <div class="flex flex-1 gap-05">
+              <div class="flex flex-col basis-[50%]">
+                <label class="text-neutral-b-600">Email</label>
+                <input
+                  v-model="email"
+                  required
+                  type="email"
+                  class="h-fit border-[1px] border-neutral-b-100 px-[15px] py-[10px] rounded-[6px] focus:outline-none"
+                />
+              </div>
+              <div class="flex flex-col basis-[50%]">
+                <label class="text-neutral-b-600">Full name</label>
+                <input
+                  v-model="name"
+                  required
+                  class="h-fit border-[1px] border-neutral-b-100 px-[15px] py-[10px] rounded-[6px] focus:outline-none"
+                />
+              </div>
+            </div>
           </div>
-          <div class="flex flex-1 gap-05">
-            <div class="flex flex-col basis-[50%]">
-              <label class="text-neutral-b-600">City</label>
-              <input
-                class="h-fit border-[1px] border-neutral-b-100 px-[15px] py-[10px] rounded-[6px] focus:outline-none"
-              />
-            </div>
-            <div class="flex flex-col basis-[50%]">
-              <label class="text-neutral-b-600">State</label>
-              <input
-                class="h-fit border-[1px] border-neutral-b-100 px-[15px] py-[10px] rounded-[6px] focus:outline-none"
-              />
-            </div>
-          </div>
-          <div class="flex flex-1 gap-05">
-            <div class="flex flex-col basis-[50%]">
-              <label class="text-neutral-b-600">Zip Code</label>
-              <input
-                class="h-fit border-[1px] border-neutral-b-100 px-[15px] py-[10px] rounded-[6px] focus:outline-none"
-              />
-            </div>
-            <div class="flex flex-col basis-[50%]">
-              <label class="text-neutral-b-600">Country</label>
-              <input
-                class="h-fit border-[1px] border-neutral-b-100 px-[15px] py-[10px] rounded-[6px] focus:outline-none"
-              />
-            </div>
-          </div>
-          <div class="flex flex-1 gap-05">
-            <div class="flex flex-col basis-[50%]">
-              <label class="text-neutral-b-600">Email</label>
-              <input
-                class="h-fit border-[1px] border-neutral-b-100 px-[15px] py-[10px] rounded-[6px] focus:outline-none"
-              />
-            </div>
-            <div class="flex flex-col basis-[50%]">
-              <label class="text-neutral-b-600">Full name</label>
-              <input
-                class="h-fit border-[1px] border-neutral-b-100 px-[15px] py-[10px] rounded-[6px] focus:outline-none"
-              />
-            </div>
-          </div>
-        </div>
+        </form>
       </div>
       <!--Order Detail-->
       <div
@@ -143,6 +160,8 @@
           </div>
         </div>
         <button
+          type="submit"
+          form="checkout"
           class="w-full h-[44px] px-06 py-04 mb-[32px] bg-neutral-b-900 text-neutral-w-900 rounded-[4px] text-[14px] flex flex-1 justify-center items-center"
         >
           Place Order
@@ -151,3 +170,46 @@
     </div>
   </section>
 </template>
+<script setup>
+const street = ref("");
+const city = ref("");
+const state = ref("");
+const zip = ref("");
+const country = ref("");
+const email = ref("");
+const name = ref("");
+
+const checkout = async () => {
+  try {
+    const response = await $fetch("/api/checkout", {
+      method: "POST",
+      body: {
+        street: street.value,
+        city: city.value,
+        state: state.value,
+        zip: zip.value,
+        country: country.value,
+        email: email.value,
+        name: name.value,
+      },
+    });
+
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = response.action;
+
+    for (const key in response.params) {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = key;
+      input.value = response.params[key];
+      form.appendChild(input);
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+  } catch (error) {
+    console.error("Checkout error", error);
+  }
+};
+</script>
