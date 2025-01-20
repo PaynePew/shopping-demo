@@ -25,11 +25,9 @@ jobs:
       - name: Build Nuxt 3 app
         run: npm run generate # 或 yarn generate
 
+      # 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          folder: .output/public # Nuxt 3 build 輸出資料夾
-          branch: gh-pages # 指定部署分支
-          # 下面這行可以自動建立 gh-pages 分支
-          create_branch: true
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .output/public # 指向 Nuxt 3 的默認輸出目錄
