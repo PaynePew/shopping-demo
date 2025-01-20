@@ -1,7 +1,8 @@
 [functions]
+command = "nuxt build"
 directory = ".netlify/functions"
 
 [[redirects]]
-from = "/*"
-to = "/.netlify/functions/server"
+from = "/api/*"
+to = "/.netlify/functions/:splat"
 status = 200
