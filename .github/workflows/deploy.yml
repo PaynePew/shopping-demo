@@ -30,4 +30,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .output/public # 指向 Nuxt 3 的默認輸出目錄
+          publish_dir: dist # 指向 Nuxt 3 的默認輸出目錄
