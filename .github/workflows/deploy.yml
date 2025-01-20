@@ -8,6 +8,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+    contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -30,3 +32,4 @@ jobs:
           branch: gh-pages # 指定部署分支
           # 下面這行可以自動建立 gh-pages 分支
           create_branch: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
