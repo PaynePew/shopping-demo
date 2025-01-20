@@ -3,7 +3,7 @@ name: Deploy Nuxt 3 to GitHub Pages
 on:
   push:
     branches:
-      - main # 或你的主要分支名稱，例如 master
+      - master # 或你的主要分支名稱，例如 master
 
 jobs:
   deploy:
