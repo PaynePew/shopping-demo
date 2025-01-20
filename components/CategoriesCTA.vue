@@ -9,7 +9,7 @@
             clothing categories.
           </p>
         </div>
-        <NuxtLink to="/" class="">
+        <NuxtLink to="/listing" class="">
           <div
             class="w-fit h-[44px] px-06 flex justify-center items-center bg-neutral-b-900 text-neutral-w-900 rounded-[4px]"
           >
