@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy Nuxt 3 to GitHub Pages
 
 on:
   push:
@@ -15,16 +15,15 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18 # 或你使用的 Node.js 版本
+          node-version: 16 # 或你使用的 Node.js 版本
 
       - name: Install dependencies
         run: npm install # 或 yarn install
 
-      - name: Build website
-        run: npm run build # 或 yarn build，根據你的專案設定
+      - name: Build Nuxt 3 app
+        run: npm run generate # 或 yarn generate
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dist # 或你的 build 輸出資料夾名稱
-
+          folder: .output/public # Nuxt 3 build 輸出資料夾
