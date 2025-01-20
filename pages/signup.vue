@@ -91,10 +91,12 @@ const router = useRouter();
 const name = ref("");
 const email = ref("");
 const password = ref("");
+const config = useRuntimeConfig();
+const baseUrl = config.public.baseUrl;
 
 const signup = async () => {
   try {
-    await $fetch("http://localhost:3000/api/auth/signup", {
+    await $fetch(`${baseUrl}/api/auth/signup`, {
       method: "POST",
       body: {
         name: name.value,

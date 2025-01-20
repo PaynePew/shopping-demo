@@ -4,13 +4,12 @@ import crypto from "crypto";
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const { street, city, state, zip, country, email, name } = body;
+  const baseUrl = process.env.BASE_URL || "http://localhost:3000";
 
   const merchantID = process.env.ECPAY_MERCHANT_ID;
   const hashKey = process.env.ECPAY_HASH_KEY;
   const hashIV = process.env.ECPAY_HASH_IV;
-  const returnURL = "http://localhost:3000/api/ecpay-callback";
-
-  console.log(merchantID);
+  const returnURL = `${baseUrl}/api/ecpay-callback`;
 
   if (!merchantID || !hashKey || !hashIV) {
     throw createError({
@@ -31,8 +30,6 @@ export default defineEventHandler(async (event) => {
   const minutes = String(currentDate.getMinutes()).padStart(2, "0");
   const seconds = String(currentDate.getSeconds()).padStart(2, "0");
   const orderDate = `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
-
-  console.log(orderDate);
 
   const tradeParams = {
     MerchantID: merchantID,

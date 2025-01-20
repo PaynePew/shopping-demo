@@ -86,10 +86,12 @@ const router = useRouter();
 const authStore = useAuthStore();
 const email = ref("");
 const password = ref("");
+const config = useRuntimeConfig();
+const baseUrl = config.public.baseUrl;
 
 const login = async () => {
   try {
-    const response = await $fetch("http://localhost:3000/api/auth/login", {
+    const response = await $fetch(`${baseUrl}/api/auth/login`, {
       method: "POST",
       body: { email: email.value, password: password.value },
       credentials: "include", // 確保攜帶 Cookie
