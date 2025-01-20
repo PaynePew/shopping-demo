@@ -96,7 +96,7 @@ const baseUrl = config.public.baseUrl;
 
 const signup = async () => {
   try {
-    await $fetch(`${baseUrl}/api/auth/signup`, {
+    await $fetch("/api/auth/signup", {
       method: "POST",
       body: {
         name: name.value,
