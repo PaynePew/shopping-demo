@@ -24,11 +24,14 @@ const calculateCheckMacValue = (params, hashKey, hashIV) => {
 };
 
 export default defineEventHandler(async (event) => {
-  const query = getQuery(event);
-  console.log("Query Parameters:", query);
+  let params = {};
 
-  const body = await readBody(event);
-  console.log("Body Parameters:", body);
+  // 1. 檢查請求類型並解析參數
+  if (event.req.method === "GET") {
+    params = getQuery(event); // 解析 GET 請求參數
+  } else if (event.req.method === "POST") {
+    params = await readBody(event); // 解析 POST 請求參數
+  }
 
   const merchantID = process.env.ECPAY_MERCHANT_ID;
   const hashKey = process.env.ECPAY_HASH_KEY;
@@ -53,7 +56,7 @@ export default defineEventHandler(async (event) => {
     PaymentType,
     CheckMacValue,
     ...otherParams
-  } = query;
+  } = params;
 
   // 2. 驗證 CheckMacValue
   const checkMac = calculateCheckMacValue(query, hashKey, hashIV);

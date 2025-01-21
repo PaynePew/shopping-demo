@@ -10,6 +10,7 @@ export default defineEventHandler(async (event) => {
   const hashKey = process.env.ECPAY_HASH_KEY;
   const hashIV = process.env.ECPAY_HASH_IV;
   const returnURL = `${baseUrl}/api/ecpay-callback`;
+  const orderResultURL = `${baseUrl}/payment`;
 
   if (!merchantID || !hashKey || !hashIV) {
     throw createError({
@@ -40,6 +41,7 @@ export default defineEventHandler(async (event) => {
     TradeDesc: "Test Order",
     ItemName: itemName,
     ReturnURL: returnURL,
+    OrderResultURL: orderResultURL,
     ChoosePayment: "Credit", // 付款方式，這裡使用信用卡
     EncryptType: 1,
   };
