@@ -6,7 +6,8 @@ import { setCookie } from "h3";
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const { email, password } = body;
-
+  console.log("JWT_SECRET:", process.env.JWT_SECRET);
+  console.log("DATABASE_URL:", process.env.DATABASE_URL);
   if (!process.env.JWT_SECRET) {
     throw new Error("JWT_SECRET is not defined in environment variables.");
   }
