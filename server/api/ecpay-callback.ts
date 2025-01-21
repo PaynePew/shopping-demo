@@ -76,13 +76,20 @@ export default defineEventHandler(async (event) => {
 
     // 更新訂單狀態
     try {
-      await prisma.order.update({
+      await prisma.order.upsert({
         where: { id: parseInt(MerchantTradeNo) }, // 假設 MerchantTradeNo 是訂單的 ID
         data: {
           status: "completed", // 更新狀態為已完成
           tradeNo: TradeNo, // 記錄綠界交易編號
           paymentDate: new Date(PaymentDate), // 記錄付款日期
           paymentType: PaymentType, // 記錄付款方式
+        },
+        create: {
+          id: parseInt(MerchantTradeNo),
+          status: "completed",
+          tradeNo: TradeNo,
+          paymentDate: new Date(PaymentDate),
+          paymentType: PaymentType,
         },
       });
 
