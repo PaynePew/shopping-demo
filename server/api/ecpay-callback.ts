@@ -59,7 +59,7 @@ export default defineEventHandler(async (event) => {
   } = params;
 
   // 2. 驗證 CheckMacValue
-  const checkMac = calculateCheckMacValue(query, hashKey, hashIV);
+  const checkMac = calculateCheckMacValue(params, hashKey, hashIV);
 
   if (checkMac !== CheckMacValue) {
     console.error("CheckMacValue verification failed.");
