@@ -1,8 +1,9 @@
-[functions]
-directory = ".netlify/functions"
+[build]
+  command = "npm run build"
+  publish = ".output/public" # 指向 Nuxt 生成的靜態文件目錄
+  functions = ".output/server/functions" # 指向 Nuxt 生成的無伺服器函數目錄
 
 [[redirects]]
-from = "/api/*"
-to = "/.netlify/functions/:splat"
-status = 200
-
+  from = "/*"
+  to = "/.netlify/functions/__nuxt" # 將所有請求轉發到 Nuxt 的伺服器端處理函數
+  status = 200
