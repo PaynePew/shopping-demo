@@ -1,5 +1,6 @@
 // server/api/ecpay-callback.js
 import { defineEventHandler, getQuery } from "h3";
+import { PrismaClient } from "@prisma/client";
 import crypto from "crypto";
 
 const calculateCheckMacValue = (params, hashKey, hashIV) => {
@@ -68,6 +69,8 @@ export default defineEventHandler(async (event) => {
     return `|0|CheckMacValue verification failed`;
   }
   // 3. 處理付款結果
+  const prisma = new PrismaClient();
+
   if (RtnCode === "1") {
     console.log("Payment successful:", MerchantTradeNo);
 
