@@ -25,7 +25,10 @@ const calculateCheckMacValue = (params, hashKey, hashIV) => {
 
 export default defineEventHandler(async (event) => {
   const query = getQuery(event);
-  console.log("SUCESSFUL!!!!!!!!!!!!!!!!!!!!!!!!");
+  console.log("Query Parameters:", query);
+
+  const body = await readBody(event);
+  console.log("Body Parameters:", body);
 
   const merchantID = process.env.ECPAY_MERCHANT_ID;
   const hashKey = process.env.ECPAY_HASH_KEY;
