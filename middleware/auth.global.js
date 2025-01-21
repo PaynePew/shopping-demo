@@ -1,3 +1,5 @@
+import jwtDecode from "jwt-decode";
+
 export default defineNuxtRouteMiddleware((to, from) => {
   let token;
 
@@ -15,7 +17,24 @@ export default defineNuxtRouteMiddleware((to, from) => {
     token = useCookie("access_token").value;
   }
 
-  if (!token && to.path !== "/login") {
+  // 排除不需要驗證的路由
+  const publicPages = ["/login", "/payment"];
+  if (!token && !publicPages.includes(to.path)) {
     return navigateTo("/login");
+  }
+
+  // 驗證 token 的有效性
+  if (token) {
+    try {
+      const decoded = jwtDecode(token);
+      const isExpired = decoded.exp * 1000 < Date.now(); // 檢查是否過期
+      if (isExpired) {
+        console.warn("Token expired");
+        return navigateTo("/login");
+      }
+    } catch (error) {
+      console.error("Invalid token:", error);
+      return navigateTo("/login");
+    }
   }
 });

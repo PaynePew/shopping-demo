@@ -84,12 +84,14 @@ export default defineEventHandler(async (event) => {
           tradeNo: TradeNo,
           paymentDate: new Date(PaymentDate),
           paymentType: PaymentType,
+          total: TradeAmt,
         },
         update: {
           status: "completed", // 更新狀態為已完成
           tradeNo: TradeNo, // 記錄綠界交易編號
           paymentDate: new Date(PaymentDate), // 記錄付款日期
           paymentType: PaymentType, // 記錄付款方式
+          total: TradeAmt,
         },
       });
 
