@@ -2,6 +2,27 @@
 import { defineEventHandler, getQuery } from "h3";
 import crypto from "crypto";
 
+const calculateCheckMacValue = (params, hashKey, hashIV) => {
+  const sortedParams = Object.keys(params)
+    .filter((key) => key !== "CheckMacValue")
+    .sort()
+    .map((key) => `${key}=${params[key]}`)
+    .join("&");
+
+  const rawString = `HashKey=${hashKey}&${sortedParams}&HashIV=${hashIV}`;
+  const encodedString = encodeURIComponent(rawString)
+    .toLowerCase()
+    .replace(/%20/g, "+")
+    .replace(/%21/g, "!")
+    .replace(/%28/g, "(")
+    .replace(/%29/g, ")")
+    .replace(/%2a/g, "*");
+
+  const sha256 = crypto.createHash("sha256");
+  sha256.update(encodedString);
+  return sha256.digest("hex").toUpperCase();
+};
+
 export default defineEventHandler(async (event) => {
   const query = getQuery(event);
   console.log("SUCESSFUL!!!!!!!!!!!!!!!!!!!!!!!!");
@@ -32,26 +53,14 @@ export default defineEventHandler(async (event) => {
   } = query;
 
   // 2. 驗證 CheckMacValue
-  const checkMacValueString = Object.keys(query)
-    .filter((key) => key !== "CheckMacValue")
-    .sort()
-    .map((key) => `${key}=${query[key]}`)
-    .join("&");
-
-  // 加入 HashKey 和 HashIV，並進行 URL 編碼
-  const checkMacValueCheck = `HashKey=${hashKey}&${checkMacValueString}&HashIV=${hashIV}`;
-  const urlEncodedString = encodeURIComponent(checkMacValueCheck).toLowerCase();
-
-  // 使用 SHA256 加密並轉為大寫
-  const sha256 = crypto.createHash("sha256");
-  sha256.update(urlEncodedString);
-  const checkMac = sha256.digest("hex").toUpperCase();
+  const checkMac = calculateCheckMacValue(query, hashKey, hashIV);
 
   if (checkMac !== CheckMacValue) {
     console.error("CheckMacValue verification failed.");
+    console.error("Calculated CheckMacValue:", checkMac);
+    console.error("Received CheckMacValue:", CheckMacValue);
     return `|0|CheckMacValue verification failed`;
   }
-
   // 3. 處理付款結果
   if (RtnCode === "1") {
     console.log("Payment successful:", MerchantTradeNo);
