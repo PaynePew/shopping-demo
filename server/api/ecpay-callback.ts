@@ -38,38 +38,46 @@ export default defineEventHandler(async (event) => {
     .map((key) => `${key}=${query[key]}`)
     .join("&");
 
+  // 加入 HashKey 和 HashIV，並進行 URL 編碼
   const checkMacValueCheck = `HashKey=${hashKey}&${checkMacValueString}&HashIV=${hashIV}`;
+  const urlEncodedString = encodeURIComponent(checkMacValueCheck).toLowerCase();
 
+  // 使用 SHA256 加密並轉為大寫
   const sha256 = crypto.createHash("sha256");
-  sha256.update(checkMacValueCheck);
+  sha256.update(urlEncodedString);
   const checkMac = sha256.digest("hex").toUpperCase();
 
   if (checkMac !== CheckMacValue) {
     console.error("CheckMacValue verification failed.");
-    return {
-      status: "error",
-      message: "CheckMacValue verification failed.",
-    };
+    return `|0|CheckMacValue verification failed`;
   }
 
   // 3. 處理付款結果
   if (RtnCode === "1") {
     console.log("Payment successful:", MerchantTradeNo);
-    // 在這裡更新你的訂單狀態
-    return {
-      status: "success",
-      message: "Payment successful.",
-      orderId: MerchantTradeNo,
-      tradeNo: TradeNo,
-      amount: TradeAmt,
-      paymentDate: PaymentDate,
-      paymentType: PaymentType,
-    };
+
+    // 更新訂單狀態
+    try {
+      await prisma.order.update({
+        where: { id: parseInt(MerchantTradeNo) }, // 假設 MerchantTradeNo 是訂單的 ID
+        data: {
+          status: "completed", // 更新狀態為已完成
+          tradeNo: TradeNo, // 記錄綠界交易編號
+          paymentDate: new Date(PaymentDate), // 記錄付款日期
+          paymentType: PaymentType, // 記錄付款方式
+        },
+      });
+
+      console.log("Order status updated successfully.");
+    } catch (error) {
+      console.error("Failed to update order status:", error);
+      return `|0|Failed to update order status`;
+    }
+
+    // 回傳成功訊息給綠界
+    return "|1|OK";
   } else {
     console.error("Payment failed:", RtnMsg);
-    return {
-      status: "error",
-      message: `Payment failed: ${RtnMsg}`,
-    };
+    return `|0|${RtnMsg}`;
   }
 });

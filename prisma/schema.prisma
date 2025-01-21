@@ -98,12 +98,15 @@ model Cart {
 }
 
 model Order {
-  id        Int      @id @default(autoincrement())
-  userId    Int
-  total     Float // 訂單總金額
-  status    String   @default("pending") // 訂單狀態：pending, completed, cancelled
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  total       Float // 訂單總金額
+  status      String   @default("pending") // 訂單狀態：pending, completed, cancelled
+  tradeNo     String? // 綠界交易編號
+  paymentDate DateTime? // 付款日期
+  paymentType String? // 付款方式（例如：信用卡、ATM 等）
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   user       User        @relation(fields: [userId], references: [id])
   orderItems OrderItem[]
